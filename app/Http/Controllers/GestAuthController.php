@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\AddToCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GestAuthController extends Controller
 {
     public function profile(){
-        return view('frontend.auth.profile');
+        $user = Auth::user()->id;
+        $buyProducts = AddToCart::where('user_id', $user )->get();
+        return view('frontend.auth.profile',compact('buyProducts'));
     }
     public function registe(){
         return view('frontend.auth.registe');
@@ -43,12 +46,13 @@ class GestAuthController extends Controller
     }
 
     public function login_post(Request $request){
-        
+
         $request->validate([
             "*" => 'required',
         ]);
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+
             return redirect()->route('gest.profile');
         }else{
             return back()->withErrors(['email' => "user is not valid"])->withInput();

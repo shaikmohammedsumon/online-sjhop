@@ -65,6 +65,9 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('frontend_asset') }}/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -127,8 +130,9 @@
 
                         <a href="{{route('cart.index')}}" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
-                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                            <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{(Auth::check()) ? $buyProducts->count() : '0'}}</span>
                         </a>
+
 
                         @if (Auth::user())
                             <a href="{{route('gest.profile')}}" class="my-auto">
@@ -308,6 +312,9 @@
     <!-- Template Javascript -->
     <script src="{{ asset('frontend_asset') }}/js/main.js"></script>
 
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    @yield('script')
 
 
 

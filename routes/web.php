@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AddToCartController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -36,15 +36,22 @@ Route::get('/shop/deleils/{id}',[ShopDetailsController::class,'index'])->name('s
 Route::middleware(['gestuserpermission'])->group(function (){
     Route::get('/cart',[CartController::class,'cart_view'])->name('cart.index');
     Route::get('user/profile',[GestAuthController::class,'profile'])->name('gest.profile');
+    Route::get('/user/buy/now/product/{id}',[AddToCartController::class,'store'])->name('user.buy.product');
+    Route::get('user/cart/buy/product/delete/{id}',[CartController::class,'delete'])->name('user.cart.buy.producd.delete');
+    Route::get('user/cart/buy/product/quantity/up/{id}',[CartController::class,'quantityUp'])->name('user.cart.buy.producd.quantity.up');
+    Route::get('user/cart/buy/product/quantity/down/{id}',[CartController::class,'quantityDown'])->name('user.cart.buy.producd.quantity.down');
 
 });
 
+
 Route::middleware(['gestauthuserpermission'])->group(function (){
+
     Route::get('user/register',[GestAuthController::class,'registe'])->name('gest.register');
     Route::post('user/register',[GestAuthController::class,'registe_post'])->name('gest.register');
 
     Route::get('user/login',[GestAuthController::class,'login'])->name('gest.login');
     Route::post('user/login',[GestAuthController::class,'login_post'])->name('gest.login');
+    
 });
 
 

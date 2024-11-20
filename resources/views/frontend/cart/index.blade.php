@@ -30,119 +30,76 @@
                     <th scope="col">Handle</th>
                   </tr>
                 </thead>
+
                 <tbody>
+
+                    @forelse ($buyProducts as $buyProduct )
                     <tr>
                         <th scope="row">
                             <div class="d-flex align-items-center">
-                                <img src="{{ asset('frontend_asset') }}/img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                <img src="{{ asset('upload/products') }}/{{$buyProduct->addCurtProduct->image}}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                             </div>
                         </th>
+
                         <td>
-                            <p class="mb-0 mt-4">Big Banana</p>
+                            <p class="mb-0 mt-4">{{$buyProduct->addCurtProduct->name}}</p>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
+                            <p class="mb-0 mt-4">{{$buyProduct->addCurtProduct->price}} ৳</p>
                         </td>
+
                         <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
+                                <form action="{{route('user.cart.buy.producd.quantity.down',$buyProduct->id,)}}" method="GET">
+                                    @csrf
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <span style="padding: 0 10px;">{{$buyProduct->quantity}}</span>
+
+                                <form action="{{route('user.cart.buy.producd.quantity.up',$buyProduct->id,)}}" method="GET">
+                                    @csrf
+                                    {{-- <input type="text" class="form-control form-control-sm text-center border-0" name="quantity" value="{{$buyProduct->quantity}}"> --}}
+
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border" >
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </td>
                         <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
+                            <p class="mb-0 mt-4">{{$buyProduct->total}} ৳</p>
                         </td>
+
                         <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
+                            <form action="{{route('user.cart.buy.producd.delete',$buyProduct->id)}}" method="GET">
+                                @csrf
+                                <button class="btn btn-md rounded-circle bg-light border mt-4" type="submit">
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </form>
                         </td>
 
                     </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('frontend_asset') }}/img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Potatoes</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('frontend_asset') }}/img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                            </div>
-                        </th>
-                        <td>
-                            <p class="mb-0 mt-4">Awesome Brocoli</p>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <div class="input-group quantity mt-4" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                    <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0 mt-4">2.99 $</p>
-                        </td>
-                        <td>
-                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                <i class="fa fa-times text-danger"></i>
-                            </button>
-                        </td>
-                    </tr>
+
+                    @empty
+                        <p style="color: red; text-align:center;">No Product</p>
+                    @endforelse
+
+
+
                 </tbody>
             </table>
         </div>
+
+
+
         <div class="mt-5">
             <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
             <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
@@ -176,5 +133,47 @@
     </div>
 </div>
 <!-- Cart Page End -->
+
+@endsection
+
+
+@section('script')
+    <script>
+        @if(session('add_cart'))
+            Toastify({
+            text: "{{session('add_cart')}}",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function(){} // Callback after click
+            }).showToast();
+        @endif
+    </script>
+
+    <script>
+        @if(session('delete'))
+            Toastify({
+            text: "{{session('delete')}}",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function(){} // Callback after click
+            }).showToast();
+        @endif
+    </script>
 
 @endsection

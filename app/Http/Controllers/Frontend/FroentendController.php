@@ -49,7 +49,6 @@ class FroentendController extends Controller
 
     public function category_product($title){
         if(Auth::check()){
-
             $user = Auth::user()->id;
             $buyProducts = AddToCart::where('user_id', $user )->get();
             $products = Product::where('status', 'active')->where('category',$title)->latest()->take(8)->get();

@@ -140,7 +140,7 @@
                                     @if (Auth::user()->image == 'defualt.jpg')
                                     <i class="fas fa-user fa-2x"> </i>
                                     @else
-                                        <img src="{{ asset('upload/profile')}}/{{Auth::user()->image}}" alt="" style="width: 45px; height:45px; border-radius:50%; border:1px solid rgb(140, 239, 0); padding:5px 5px 0 5px;">
+                                        <img src="{{ asset('upload/profile')}}/{{Auth::user()->image}}" alt="" style="width: 45px; height:45px; border-radius:50%; border:2px solid rgb(239, 115, 0); margin:5px 5px 0 5px;">
                                     @endif
                                 @else
                                 <i class="fas fa-user fa-2x"> </i>

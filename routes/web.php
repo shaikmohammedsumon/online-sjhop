@@ -51,7 +51,7 @@ Route::middleware(['gestauthuserpermission'])->group(function (){
 
     Route::get('user/login',[GestAuthController::class,'login'])->name('gest.login');
     Route::post('user/login',[GestAuthController::class,'login_post'])->name('gest.login');
-    
+
 });
 
 

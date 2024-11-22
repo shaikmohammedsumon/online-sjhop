@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\GestAuthController;
 use App\Http\Controllers\RoleManagementController;
@@ -41,6 +42,9 @@ Route::middleware(['gestuserpermission'])->group(function (){
     Route::get('user/cart/buy/product/quantity/up/{id}',[CartController::class,'quantityUp'])->name('user.cart.buy.producd.quantity.up');
     Route::get('user/cart/buy/product/quantity/down/{id}',[CartController::class,'quantityDown'])->name('user.cart.buy.producd.quantity.down');
 
+    //checkout
+    Route::get('/checkout/product',[CheckoutController::class,'index'])->name('checkout.index');
+    Route::post('/checkout/confirm/product',[CheckoutController::class,'store'])->name('chechout.confirm.product');
 });
 
 

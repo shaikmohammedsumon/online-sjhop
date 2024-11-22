@@ -12,7 +12,7 @@ class CartController extends Controller
 {
     public function cart_view(){
         $user = Auth::user()->id;
-        $buyProducts = AddToCart::where('user_id', $user )->get();
+        $buyProducts = AddToCart::where('user_id', $user )->latest()->get();
         return view('frontend.cart.index',compact('buyProducts'));
     }
 

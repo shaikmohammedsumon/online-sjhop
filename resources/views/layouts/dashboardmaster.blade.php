@@ -71,6 +71,8 @@
                         </a>
                     </li>
 
+                    @if (Auth::user()->role == 'admin')
+
                     <li class="menu-item">
                         <a href="#Manegement" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
                             <span class="menu-icon"><i class="bx bx-file"></i></span>
@@ -102,26 +104,54 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
+                    @if (Auth::user()->role == 'admin' ||Auth::user()->role == 'maneger')
+                        <li class="menu-item">
+                            <a href="#Category" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
+                                <span class="menu-icon"><i class="bx bx-file"></i></span>
+                                <span class="menu-text"> Category</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="Category">
+                                <ul class="sub-menu">
+
+                                    <li class="menu-item">
+                                        <a class='menu-link' href='{{route('category.index')}}'>
+                                            <span class="menu-text">show Categoris</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
 
                     <li class="menu-item">
-                        <a href="#Category" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
+                        <a href="#OderProducts" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
                             <span class="menu-icon"><i class="bx bx-file"></i></span>
-                            <span class="menu-text"> Category</span>
+                            <span class="menu-text">Order Products</span>
                             <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="Category">
+                        <div class="collapse" id="OderProducts">
                             <ul class="sub-menu">
-
                                 <li class="menu-item">
-                                    <a class='menu-link' href='{{route('category.index')}}'>
-                                        <span class="menu-text">show Categoris</span>
+                                    <a class='menu-link' href='{{route('new.order.product')}}'>
+                                        <span class="menu-text">New Order Products</span>
                                     </a>
                                 </li>
-
+                                <li class="menu-item">
+                                    <a class='menu-link' href='#'>
+                                        <span class="menu-text">Delivery Process</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class='menu-link' href='#'>
+                                        <span class="menu-text">Delivery Complite</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
-
 
                     <li class="menu-item">
                         <a href="#Products" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">

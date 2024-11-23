@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleManagementController;
 // use App\Http\Controllers\CheckoutAndCartController;
 use App\Http\Controllers\Frontend\FroentendController;
 use App\Http\Controllers\Frontend\ShopDetailsController;
+use App\Http\Controllers\OrderProductController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -65,44 +66,51 @@ Route::middleware(['gestauthuserpermission'])->group(function (){
 
 
 //Authencation
-Auth::routes();
+Auth::routes(['register' =>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['dashboardRoleCheckMiddleware'])->group(function(){
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//user
-Route::get('/profile',[UserController::class,'view'])->name('pforile.update');
-Route::post('/profile/name/update',[UserController::class,'name_update'])->name('pforile.name.update');
-Route::post('/profile/password/update',[UserController::class,'password_update'])->name('pforile.password.update');
-Route::post('/profile/image/update',[UserController::class,'image_update'])->name('pforile.image.update');
-
-//role Management
-Route::get('/manager/details',[RoleManagementController::class,'manager_index'])->name('manager.details');
-Route::post('/manager/role/{id}',[RoleManagementController::class,'manager_role'])->name('manager.role');
-
-Route::get('/seller/details',[RoleManagementController::class,'seller_index'])->name('seller.details');
-Route::post('/seller/role/{id}',[RoleManagementController::class,'seller_role'])->name('seller.role');
-
-Route::get('/user/details',[RoleManagementController::class,'index'])->name('user.details');
-Route::post('/user/role/{id}',[RoleManagementController::class,'user_role'])->name('user.role');
+    //user
+    Route::get('/profile',[UserController::class,'view'])->name('pforile.update');
+    Route::post('/profile/name/update',[UserController::class,'name_update'])->name('pforile.name.update');
+    Route::post('/profile/password/update',[UserController::class,'password_update'])->name('pforile.password.update');
+    Route::post('/profile/image/update',[UserController::class,'image_update'])->name('pforile.image.update');
 
 
 
+    //Categoris
+    Route::get('/category/index',[CategoryController::class,'index'])->name('category.index');
+    Route::post('/category/created',[CategoryController::class,'created'])->name('category.created');
+    Route::get('/category/action/{slug}',[CategoryController::class,'action'])->name('category.action');
+    Route::get('/category/edit/{slug}',[CategoryController::class,'edit'])->name('category.edit');
+    Route::post('/category/update/{slug}',[CategoryController::class,'update'])->name('category.update');
+    Route::get('/category/delete/{slug}',[CategoryController::class,'delete'])->name('category.delete');
 
-//Categoris
-Route::get('/category/index',[CategoryController::class,'index'])->name('category.index');
-Route::post('/category/created',[CategoryController::class,'created'])->name('category.created');
-Route::get('/category/action/{slug}',[CategoryController::class,'action'])->name('category.action');
-Route::get('/category/edit/{slug}',[CategoryController::class,'edit'])->name('category.edit');
-Route::post('/category/update/{slug}',[CategoryController::class,'update'])->name('category.update');
-Route::get('/category/delete/{slug}',[CategoryController::class,'delete'])->name('category.delete');
+    //Product
+    Route::resource('/products',ProductController::class);
+    Route::get('/product/action/{name}',[ProductController::class,'action'])->name('product.action');
+    Route::get('/product/fresh/organic/vegetables/{name}',[ProductController::class,'organic'])->name('product.fresh.organic.vegetables');
+    Route::post('/products/category/{id}',[ProductController::class,'product_category'])->name('product.category');
 
 
-//Product
-Route::resource('/products',ProductController::class);
-Route::get('/product/action/{name}',[ProductController::class,'action'])->name('product.action');
-Route::get('/product/fresh/organic/vegetables/{name}',[ProductController::class,'organic'])->name('product.fresh.organic.vegetables');
-Route::post('/products/category/{id}',[ProductController::class,'product_category'])->name('product.category');
+    //Order Product
+    Route::get('/new.order.by.product',[OrderProductController::class,'index'])->name('new.order.product');
+
+});
+
+Route::middleware(['adminRoleCheckMiddleware'])->group(function(){
+    //role Management
+    Route::get('/manager/details',[RoleManagementController::class,'manager_index'])->name('manager.details');
+    Route::post('/manager/role/{id}',[RoleManagementController::class,'manager_role'])->name('manager.role');
+
+    Route::get('/seller/details',[RoleManagementController::class,'seller_index'])->name('seller.details');
+    Route::post('/seller/role/{id}',[RoleManagementController::class,'seller_role'])->name('seller.role');
+
+    Route::get('/user/details',[RoleManagementController::class,'index'])->name('user.details');
+    Route::post('/user/role/{id}',[RoleManagementController::class,'user_role'])->name('user.role');
+});
 
 
 

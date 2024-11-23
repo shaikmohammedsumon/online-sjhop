@@ -130,14 +130,15 @@
                             </a>
                         </li>
                         @endforeach
-
-                        @if (request()->routeIs('froentend.category.product', $category->title ))
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                // Scroll smoothly to the element with id "tab-1"
-                                document.getElementById("tab-1").scrollIntoView({ behavior: "smooth" });
-                            });
-                        </script>
+                        @if (isset($category))
+                            @if (request()->routeIs('froentend.category.product', $category->title ))
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    // Scroll smoothly to the element with id "tab-1"
+                                    document.getElementById("tab-1").scrollIntoView({ behavior: "smooth" });
+                                });
+                            </script>
+                            @endif
                         @endif
 
                     </ul>

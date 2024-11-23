@@ -12,6 +12,8 @@ class AddToCart extends Model
         return $this->hasOne(Product::class,'id','product_id');
     }
 
-    // public function 
+    public function byproductUserDetails(){
+        return $this->hasOne(Checkout::class,'byUser_Id','user_id');
+    }
 
 }

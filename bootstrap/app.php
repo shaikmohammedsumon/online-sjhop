@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\AdminRoleCheckMiddleware;
+use App\Http\Middleware\DashboardRoleCheckMiddleware;
 use App\Http\Middleware\GestAuthUserPermissionMiddleware;
 use App\Http\Middleware\GestUserPermissionMiddleware;
 use Illuminate\Foundation\Application;
@@ -16,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'gestuserpermission' => GestUserPermissionMiddleware::class,
             'gestauthuserpermission' =>GestAuthUserPermissionMiddleware::class,
+            'dashboardRoleCheckMiddleware' =>DashboardRoleCheckMiddleware::class,
+            'adminRoleCheckMiddleware' => AdminRoleCheckMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

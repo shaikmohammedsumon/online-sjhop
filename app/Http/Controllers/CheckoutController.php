@@ -47,7 +47,7 @@ class CheckoutController extends Controller
                 'companyName' => $request->companyName,
                 'address' => $request->address,
                 'town_city' => $request->town_city,
-                'country' => $request->country,
+                'country' =>'Bangladesh',
                 'postConde' => $request->postConde,
                 'phone' => $request->phone,
                 'email' => $request->email,

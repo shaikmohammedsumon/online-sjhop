@@ -18,8 +18,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(10);
-        return view('dashboard.product.index',compact('products'));
+        if(Auth::user()->role == 'admin' || Auth::user()->role == 'maneger'){
+            $products = Product::latest()->paginate(10);
+            return view('dashboard.product.index',compact('products'));
+        }else{
+            $products = Product::where('seller_id',Auth::user()->id)->latest()->paginate(10);
+            return view('dashboard.product.index',compact('products'));
+        }
     }
 
     /**
@@ -29,7 +34,6 @@ class ProductController extends Controller
     {
         $categorys = Category::latest()->get();
         return view('dashboard.product.store',compact('categorys'));
-
     }
 
     /**

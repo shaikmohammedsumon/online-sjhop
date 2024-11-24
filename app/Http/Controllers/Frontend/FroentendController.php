@@ -14,7 +14,7 @@ class FroentendController extends Controller
     public function index(){
         if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
             $products = Product::where('status', 'active')->latest()->take(8)->get();
             $categorys = Category::where('status', 'active')->latest()->get();
             $organics = Product::where('resh_organic_vegetables', 'active')->latest()->get();
@@ -33,7 +33,7 @@ class FroentendController extends Controller
     public function all_product(){
         if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
             $products = Product::where('status', 'active')->latest()->take(8)->get();
             $categorys = Category::where('status', 'active')->latest()->get();
             $organics = Product::where('resh_organic_vegetables', 'active')->latest()->get();
@@ -50,7 +50,7 @@ class FroentendController extends Controller
     public function category_product($title){
         if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
             $products = Product::where('status', 'active')->where('category',$title)->latest()->take(8)->get();
             $categorys = Category::where('status', 'active')->latest()->get();
             $organics = Product::where('resh_organic_vegetables', 'active')->latest()->get();

@@ -11,8 +11,9 @@ class GestAuthController extends Controller
 {
     public function profile(){
         $user = Auth::user()->id;
-        $buyProducts = AddToCart::where('user_id', $user )->get();
-        return view('frontend.auth.profile',compact('buyProducts'));
+        $buyProduct_checkout = AddToCart::where('user_id', $user )->where('processing', 'active')->latest()->get();
+        $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
+        return view('frontend.auth.profile',compact('buyProducts','buyProduct_checkout'));
     }
     public function registe(){
         return view('frontend.auth.registe');

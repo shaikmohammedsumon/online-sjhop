@@ -38,6 +38,10 @@ class CheckoutController extends Controller
             'payment_method' => 'required',
         ]);
 
+
+
+
+
         if($request->companyName){
             Checkout::create([
                 'byUser_Id' => Auth::user()->id,
@@ -55,6 +59,12 @@ class CheckoutController extends Controller
                 'payment_method' => $request->payment_method,
                 'created_at' => now(),
             ]);
+
+            $array = explode(',', $request->addToCart_ID);
+            AddToCart::whereIn('id',  $array)->update([
+                'processing' => 'active',
+            ]);
+
             return redirect()->route('cart.index')->with('bySeccess','your product by Seccess');
         }else{
             Checkout::create([
@@ -73,6 +83,13 @@ class CheckoutController extends Controller
                 'payment_method' => $request->payment_method,
                 'created_at' => now(),
             ]);
+
+            $array = explode(',', $request->addToCart_ID);
+
+            AddToCart::whereIn('id', $array)->update([
+                'processing' => 'active',
+            ]);
+
             return redirect()->route('cart.index')->with('bySeccess','your product by Seccess');
         }
     }

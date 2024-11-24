@@ -133,7 +133,6 @@
                             <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">{{(Auth::check()) ? $buyProducts->count() : '0'}}</span>
                         </a>
 
-
                         @if (Auth::user())
                             <a href="{{route('gest.profile')}}" class="my-auto">
                                 @if (Auth::user())

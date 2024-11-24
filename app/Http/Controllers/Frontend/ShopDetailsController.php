@@ -15,7 +15,7 @@ class ShopDetailsController extends Controller
     public function shop(){
         if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->latest()->paginate(9);
             return view('frontend.shop.index',compact('products','categorys','buyProducts'));
@@ -29,7 +29,7 @@ class ShopDetailsController extends Controller
     public function shop_category($category){
          if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
 
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('category' ,$category)->latest()->paginate(9);
@@ -45,7 +45,7 @@ class ShopDetailsController extends Controller
     public function shop_price(Request $request){
          if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
 
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')
@@ -68,7 +68,7 @@ class ShopDetailsController extends Controller
     public function index($id){
          if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
 
             $shopDetails = Product::where('id', $id)->first();
             $categorys = Category::where('status', 'active')->latest()->get();
@@ -86,7 +86,7 @@ class ShopDetailsController extends Controller
     public function fruitlist(Request $request){
          if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
 
             $selects = $request->fruitlist;
             $categorys = Category::where('status', 'active')->latest()->get();
@@ -106,7 +106,7 @@ class ShopDetailsController extends Controller
     public function product_section($section){
          if(Auth::check()){
             $user = Auth::user()->id;
-            $buyProducts = AddToCart::where('user_id', $user )->get();
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
 
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('product_category',$section)->latest()->paginate(9);

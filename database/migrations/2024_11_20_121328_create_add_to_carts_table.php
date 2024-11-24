@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('seler_id');
             $table->string('quantity')->default('1');
             $table->integer('total');
+            $table->string('processing')->default('deactive');
+
             $table->timestamps();
         });
     }

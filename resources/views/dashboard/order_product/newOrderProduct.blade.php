@@ -84,7 +84,7 @@
                                                 <div class="modal-body">
                                                     <div class="info-container" style="display: flex; gap: 20px; align-items: center; padding: 10px 0;">
                                                         <h4>Name :</h4>
-                                                        <p>{{$view_product_detail->byproductUserDetails->byUserLastName}} {{$view_product_detail->byproductUserDetails->byUserLastName}}</p>
+                                                        <p>{{$view_product_detail->byproductUserDetails->byUserFirstName}} {{$view_product_detail->byproductUserDetails->byUserLastName}}</p>
                                                     </div>
                                                     <div class="info-container" style="display: flex; gap: 20px; align-items: center; padding: 10px 0;">
                                                         <h4>Company Name:</h4>

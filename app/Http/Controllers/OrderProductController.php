@@ -60,7 +60,7 @@ class OrderProductController extends Controller
         // চেক করুন User ID অ্যারের ভেতরে আছে কিনা
         if (in_array(Auth::user()->role == 'admin' || Auth::user()->role == 'maneger' ||  Auth::user()->role == 'seller', $matchedCarts)) {
             // whereIn ব্যবহার করে ডেটা আনুন
-            $view_product_details = AddToCart::whereIn('id', $matchedCarts)->get();
+            $view_product_details = AddToCart::whereIn('id', $matchedCarts)->latest()->get();
             return view('dashboard.order_product.newOrderProduct', compact('view_product_details'));
         }else {
             // যদি মিল না পাওয়া যায়

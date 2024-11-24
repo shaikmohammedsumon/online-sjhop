@@ -72,11 +72,7 @@ Route::middleware(['dashboardRoleCheckMiddleware'])->group(function(){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    //user
-    Route::get('/profile',[UserController::class,'view'])->name('pforile.update');
-    Route::post('/profile/name/update',[UserController::class,'name_update'])->name('pforile.name.update');
-    Route::post('/profile/password/update',[UserController::class,'password_update'])->name('pforile.password.update');
-    Route::post('/profile/image/update',[UserController::class,'image_update'])->name('pforile.image.update');
+
 
 
 
@@ -112,5 +108,11 @@ Route::middleware(['adminRoleCheckMiddleware'])->group(function(){
     Route::post('/user/role/{id}',[RoleManagementController::class,'user_role'])->name('user.role');
 });
 
+
+ //user
+ Route::get('/profile',[UserController::class,'view'])->name('pforile.update');
+ Route::post('/profile/name/update',[UserController::class,'name_update'])->name('pforile.name.update');
+ Route::post('/profile/password/update',[UserController::class,'password_update'])->name('pforile.password.update');
+ Route::post('/profile/image/update',[UserController::class,'image_update'])->name('pforile.image.update');
 
 

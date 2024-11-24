@@ -10,8 +10,11 @@
                 <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
                 <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
                 <div class="position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
-                    <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
+                    <form action="{{route('shop.search')}}" method="POST">
+                        @csrf
+                        <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" placeholder="Search" name="search">
+                        <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
+                    </form>
                 </div>
             </div>
             <div class="col-md-12 col-lg-5">
@@ -301,7 +304,7 @@
 
 
 <!-- Banner Section Start-->
-<div class="container-fluid banner bg-secondary my-5">
+{{-- <div class="container-fluid banner bg-secondary my-5">
     <div class="container py-5">
         <div class="row g-4 align-items-center">
             <div class="col-lg-6">
@@ -326,12 +329,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Banner Section End -->
 
 
 <!-- Bestsaler Product Start -->
-<div class="container-fluid py-5">
+{{-- <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mx-auto mb-5" style="max-width: 700px;">
             <h1 class="display-4">Bestseller Products</h1>
@@ -534,7 +537,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Bestsaler Product End -->
 
 

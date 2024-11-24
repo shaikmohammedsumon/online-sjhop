@@ -18,11 +18,14 @@ class ShopDetailsController extends Controller
             $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys','buyProducts'));
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','buyProducts','featured'));
+
         }else{
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys'));
+            $featured  = Product::where('status', 'active')->latest()->get();
+            return view('frontend.shop.index',compact('products','categorys','featured'));
         }
     }
 
@@ -30,14 +33,15 @@ class ShopDetailsController extends Controller
          if(Auth::check()){
             $user = Auth::user()->id;
             $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
-
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('category' ,$category)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys','buyProducts'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','buyProducts','featured'));
          }else{
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('category' ,$category)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys'));
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','featured'));
          }
     }
 
@@ -53,7 +57,8 @@ class ShopDetailsController extends Controller
             ->latest()->paginate(9)
             ->appends(['rangeInput' => $request->rangeInput]);
             $return_rangeInput = $request->rangeInput;
-            return view('frontend.shop.index',compact('products','categorys','return_rangeInput','buyProducts'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','return_rangeInput','buyProducts','featured'));
          }else{
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')
@@ -61,7 +66,8 @@ class ShopDetailsController extends Controller
             ->latest()->paginate(9)
             ->appends(['rangeInput' => $request->rangeInput]);
             $return_rangeInput = $request->rangeInput;
-            return view('frontend.shop.index',compact('products','categorys','return_rangeInput'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','return_rangeInput','featured'));
          }
     }
 
@@ -73,12 +79,14 @@ class ShopDetailsController extends Controller
             $shopDetails = Product::where('id', $id)->first();
             $categorys = Category::where('status', 'active')->latest()->get();
             $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
-            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','buyProducts'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','buyProducts','featured'));
          }else{
             $shopDetails = Product::where('id', $id)->first();
             $categorys = Category::where('status', 'active')->latest()->get();
             $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
-            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','featured'));
          }
     }
 
@@ -91,12 +99,14 @@ class ShopDetailsController extends Controller
             $selects = $request->fruitlist;
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('category' ,$request->fruitlist)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys','selects','buyProducts'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','selects','buyProducts','featured'));
          }else{
             $selects = $request->fruitlist;
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('category' ,$request->fruitlist)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys','selects'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','selects','featured'));
          }
 
         // return $request;
@@ -110,14 +120,40 @@ class ShopDetailsController extends Controller
 
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('product_category',$section)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys','buyProducts'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','buyProducts','featured'));
         }else{
             $categorys = Category::where('status', 'active')->latest()->get();
             $products = Product::where('status', 'active')->where('product_category',$section)->latest()->paginate(9);
-            return view('frontend.shop.index',compact('products','categorys'));
+             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','featured'));
         }
 
     }
+
+
+
+
+    public function shop_search(Request $request){
+        $search = $request->search;
+        if(Auth::check()){
+            $products = Product::where('name','LIKE','%' .$request->search .'%')->latest()->paginate(9);
+            $user = Auth::user()->id;
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
+            $categorys = Category::where('status', 'active')->latest()->get();
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','buyProducts','featured'));
+        }else{
+            $products = Product::where('name','LIKE','%' .$request->search .'%')->latest()->paginate(9);
+            $categorys = Category::where('status', 'active')->latest()->get();
+            $return_rangeInput = $request->rangeInput;
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            return view('frontend.shop.index',compact('products','categorys','featured'));
+        }
+
+   }
+
+
 
 
 }

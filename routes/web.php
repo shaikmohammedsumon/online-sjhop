@@ -31,6 +31,10 @@ Route::get('/shop/category/{category}',[ShopDetailsController::class,'shop_categ
 Route::post('/shop/fruitlist',[ShopDetailsController::class,'fruitlist'])->name('shop.fruitlist');
 Route::get('/shop/price',[ShopDetailsController::class,'shop_price'])->name('shop.price');
 Route::get('/products/section/{section}',[ShopDetailsController::class,'product_section'])->name('product.section');
+Route::post('/shop/search',[ShopDetailsController::class,'shop_search'])->name('shop.search');
+
+
+
 
 Route::get('/shop/deleils/{id}',[ShopDetailsController::class,'index'])->name('shop.details');
 

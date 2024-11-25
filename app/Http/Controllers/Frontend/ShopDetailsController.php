@@ -91,6 +91,43 @@ class ShopDetailsController extends Controller
     }
 
 
+    public function index_profile($id){
+        if(Auth::check()){
+            $user = Auth::user()->id;
+            $buyProducts = AddToCart::where('user_id', $user )->where('processing','deactive')->get();
+
+            $productquery = AddToCart::where('id',$id)->first();
+            $shopDetails = Product::where('id', $productquery->product_id)->first();
+
+            $comment = AddToCart::where('id',$id)
+            ->where('user_id',$user)
+            ->where('confirmation','complete')
+            ->first();
+
+            $categorys = Category::where('status', 'active')->latest()->get();
+            $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+
+            // return $comment . "<br>" . $user . "<br>". $id . "<br>";
+            return view('frontend.shopDetails.index',compact('shopDetails','comment','relateds','categorys','buyProducts','featured'));
+        }else{
+
+            $user = Auth::user()->id;
+            $productquery = AddToCart::where('id',$id)->first();
+            $shopDetails = Product::where('id', $productquery->product_id)->first();
+
+
+            $categorys = Category::where('status', 'active')->latest()->get();
+            $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+
+           return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','featured'));
+        }
+   }
+
+
+
+
     public function fruitlist(Request $request){
          if(Auth::check()){
             $user = Auth::user()->id;

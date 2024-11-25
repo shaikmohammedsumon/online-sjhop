@@ -34,9 +34,8 @@ Route::get('/products/section/{section}',[ShopDetailsController::class,'product_
 Route::post('/shop/search',[ShopDetailsController::class,'shop_search'])->name('shop.search');
 
 
-
-
 Route::get('/shop/deleils/{id}',[ShopDetailsController::class,'index'])->name('shop.details');
+
 
 //cart
 Route::middleware(['gestuserpermission'])->group(function (){
@@ -51,6 +50,10 @@ Route::middleware(['gestuserpermission'])->group(function (){
     //checkout
     Route::get('/checkout/product',[CheckoutController::class,'index'])->name('checkout.index');
     Route::post('/checkout/confirm/product',[CheckoutController::class,'store'])->name('chechout.confirm.product');
+
+    Route::get('/shop/deleils/profile/{id}',[ShopDetailsController::class,'index_profile'])->name('shop.details.profile');
+    
+
 });
 
 

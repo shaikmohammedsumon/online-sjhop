@@ -73,7 +73,7 @@
                         $totalSum += $buyProduct->total; // প্রতিটি $buyProduct->total যোগ করা
                     @endphp
 
-                        <tr onclick="window.location.href='{{route('shop.details',$buyProduct->product_id)}}';" style="cursor: pointer;">
+                        <tr onclick="window.location.href='{{route('shop.details.profile',$buyProduct->id)}}';" style="cursor: pointer;">
                             <th scope="row">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset('upload/products') }}/{{$buyProduct->addCurtProduct->image}}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">

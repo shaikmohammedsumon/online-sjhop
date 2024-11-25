@@ -43,6 +43,7 @@ Route::middleware(['gestuserpermission'])->group(function (){
     Route::get('/cart',[CartController::class,'cart_view'])->name('cart.index');
     Route::get('user/profile',[GestAuthController::class,'profile'])->name('gest.profile');
     Route::get('/user/buy/now/product/{id}',[AddToCartController::class,'store'])->name('user.buy.product');
+    Route::post('/user/buy/now/product/details/{id}',[AddToCartController::class,'store_details'])->name('user.buy.product.details');
     Route::get('user/cart/buy/product/delete/{id}',[CartController::class,'delete'])->name('user.cart.buy.producd.delete');
     Route::get('user/cart/buy/product/quantity/up/{id}',[CartController::class,'quantityUp'])->name('user.cart.buy.producd.quantity.up');
     Route::get('user/cart/buy/product/quantity/down/{id}',[CartController::class,'quantityDown'])->name('user.cart.buy.producd.quantity.down');

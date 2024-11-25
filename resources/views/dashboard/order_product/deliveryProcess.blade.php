@@ -56,7 +56,16 @@
                                                 @csrf
                                                 <select onchange="document.querySelector('#confirm{{$view_product_detail->id}}').submit()" name="confirmation" id="" class="btn btn-info" style="border: none;">
                                                     <option value="{{$view_product_detail->confirmation}}">{{$view_product_detail->confirmation}}</option>
-                                                    <option value="approve">Approve</option>
+                                                    <option value="Only 7 days left for your product to be delivered">Only 7 days left for your product to be delivered</option>
+                                                    <option value="Only 6 days left for your product to be delivered">Only 6 days left for your product to be delivered</option>
+                                                    <option value="Only 5 days left for your product to be delivered">Only 5 days left for your product to be delivered</option>
+                                                    <option value="Only 4 days left for your product to be delivered">Only 4 days left for your product to be delivered</option>
+                                                    <option value="Only 3 days left for your product to be delivered">Only 3 days left for your product to be delivered</option>
+                                                    <option value="Only 2 days left for your product to be delivered">Only 2 days left for your product to be delivered</option>
+                                                    <option value="Only 1 days left for your product to be delivered">Only 1 days left for your product to be delivered</option>
+                                                    <option value="Today receive your product">Today receive your product</option>
+                                                    <option value="Complete">Complete</option>
+
                                                 </select>
                                             </form>
                                         </td>
@@ -81,9 +90,17 @@
                                             <td>
                                                 <form action="{{route('order.confirmation',$view_product_detail->id)}}" method="POST"  id="confirm{{$view_product_detail->id}}">
                                                     @csrf
-                                                    <select onchange="document.querySelector('#confirm{{$view_product_detail->id}}').submit()" name="confirmation" id="" class="btn btn-info" style="border: none;">
+                                                    <select onchange="document.querySelector('#confirm{{$view_product_detail->id}}').submit()" name="confirmation" id="" class="btn btn-info trxt-left" style="border: none;">
                                                         <option value="{{$view_product_detail->confirmation}}">{{$view_product_detail->confirmation}}</option>
-                                                        <option value="approve">Approve</option>
+                                                        <option value="Only 7 days left for your product to be delivered">Only 7 days left for your product to be delivered</option>
+                                                        <option value="Only 6 days left for your product to be delivered">Only 6 days left for your product to be delivered</option>
+                                                        <option value="Only 5 days left for your product to be delivered">Only 5 days left for your product to be delivered</option>
+                                                        <option value="Only 4 days left for your product to be delivered">Only 4 days left for your product to be delivered</option>
+                                                        <option value="Only 3 days left for your product to be delivered">Only 3 days left for your product to be delivered</option>
+                                                        <option value="Only 2 days left for your product to be delivered">Only 2 days left for your product to be delivered</option>
+                                                        <option value="Only 1 days left for your product to be delivered">Only 1 days left for your product to be delivered</option>
+                                                        <option value="Today receive your product">Today receive your product</option>
+                                                        <option value="complete">Complete</option>
                                                     </select>
                                                 </form>
                                             </td>

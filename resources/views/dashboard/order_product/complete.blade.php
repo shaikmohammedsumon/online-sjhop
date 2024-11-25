@@ -52,13 +52,7 @@
                                         </td>
 
                                         <td>
-                                            <form action="{{route('order.confirmation',$view_product_detail->id)}}" method="POST"  id="confirm{{$view_product_detail->id}}">
-                                                @csrf
-                                                <select onchange="document.querySelector('#confirm{{$view_product_detail->id}}').submit()" name="confirmation" id="" class="btn btn-info" style="border: none;">
-                                                    <option value="{{$view_product_detail->confirmation}}">{{$view_product_detail->confirmation}}</option>
-                                                    <option value="approve">Approve</option>
-                                                </select>
-                                            </form>
+                                            {{$view_product_detail->confirmation}}
                                         </td>
                                         @endif
                                     @else
@@ -79,13 +73,7 @@
                                             </td>
 
                                             <td>
-                                                <form action="{{route('order.confirmation',$view_product_detail->id)}}" method="POST"  id="confirm{{$view_product_detail->id}}">
-                                                    @csrf
-                                                    <select onchange="document.querySelector('#confirm{{$view_product_detail->id}}').submit()" name="confirmation" id="" class="btn btn-info" style="border: none;">
-                                                        <option value="{{$view_product_detail->confirmation}}">{{$view_product_detail->confirmation}}</option>
-                                                        <option value="approve">Approve</option>
-                                                    </select>
-                                                </form>
+                                                {{$view_product_detail->confirmation}}
                                             </td>
 
                                         @endif

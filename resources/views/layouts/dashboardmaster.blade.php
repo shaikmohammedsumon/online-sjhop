@@ -140,12 +140,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class='menu-link' href='#'>
+                                    <a class='menu-link' href='{{route('product.delivery.process')}}'>
                                         <span class="menu-text">Delivery Process</span>
                                     </a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class='menu-link' href='#'>
+                                    <a class='menu-link' href='{{route('product.delivery.confirm')}}'>
                                         <span class="menu-text">Delivery Complite</span>
                                     </a>
                                 </li>

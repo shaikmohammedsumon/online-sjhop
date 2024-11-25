@@ -96,7 +96,13 @@
                             </td>
 
                             <td>
-                              <p  class="mb-0 mt-4">{{ ($buyProduct->processing == 'active') ? 'processing' : ''}}</p>
+                              <p  class="mb-0 mt-4">
+                                @if ($buyProduct->confirmation == 'deactive')
+                                    {{ ($buyProduct->processing == 'active') ? 'processing' : 'processing'}}
+                                @else
+                                    {{$buyProduct->confirmation }}
+                                @endif
+                            </p>
                             </td>
                         </tr>
                     @empty

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('quantity')->default('1');
             $table->integer('total');
             $table->string('processing')->default('deactive');
-
+            $table->string('confirmation')->default('deactive');
             $table->timestamps();
         });
     }

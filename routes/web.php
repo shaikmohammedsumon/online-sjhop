@@ -78,9 +78,6 @@ Route::middleware(['dashboardRoleCheckMiddleware'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-
-
     //Categoris
     Route::get('/category/index',[CategoryController::class,'index'])->name('category.index');
     Route::post('/category/created',[CategoryController::class,'created'])->name('category.created');
@@ -99,6 +96,13 @@ Route::middleware(['dashboardRoleCheckMiddleware'])->group(function(){
     //Order Product
     Route::get('/new.order.by.product',[OrderProductController::class,'index'])->name('new.order.product');
 
+    Route::get('/nproduct.delivery.process',[OrderProductController::class,'index_delivery'])->name('product.delivery.process');
+    Route::get('/nproduct.delivery.confirm',[OrderProductController::class,'index_confirm'])->name('product.delivery.confirm');
+
+    Route::post('/order/confirmation/{id}',[AddToCartController::class,'confirm'])->name('order.confirmation');
+
+
+
 });
 
 Route::middleware(['adminRoleCheckMiddleware'])->group(function(){
@@ -111,6 +115,7 @@ Route::middleware(['adminRoleCheckMiddleware'])->group(function(){
 
     Route::get('/user/details',[RoleManagementController::class,'index'])->name('user.details');
     Route::post('/user/role/{id}',[RoleManagementController::class,'user_role'])->name('user.role');
+
 });
 
 

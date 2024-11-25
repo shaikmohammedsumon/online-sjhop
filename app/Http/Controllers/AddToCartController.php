@@ -40,7 +40,21 @@ class AddToCartController extends Controller
             'created_at' =>now(),
         ]);
         return redirect()->route('cart.index')->with('add_cart','Your Product add to cart please see and buy now');
+    }
 
+    public function confirm(Request $request,$id){
+        $addcart = AddToCart::where('id',$id)->first();
 
+        if( $addcart->confirmation == 'deactive'){
+            AddToCart::find($addcart->id)->update([
+                'confirmation' => 'approve',
+            ]);
+            return back();
+        }else{
+            AddToCart::find($addcart->id)->update([
+                'confirmation' => $request->confirmation,
+            ]);
+            return back();
+        }
     }
 }

@@ -125,25 +125,27 @@
                             </div>
 
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+
+                                @foreach ($comments as $comment)
+
                                 <div class="d-flex">
-                                    <img src="{{asset('frontend_asset')}}/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                    <img src="{{asset('upload/profile')}}/{{$comment->userComment->image}}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                     <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                        <p class="mb-2" style="font-size: 14px;"> {{ Carbon\Carbon::parse($comment->created_at)->format('F-d-Y') }}</p>
                                         <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
+                                            <h5>{{$comment->userComment->name}} {{$comment->userComment->last_name}}</h5>
                                         </div>
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                                        <p>{{$comment->review}}</p>
                                     </div>
                                 </div>
-                                <div class="d-flex">
+                                @endforeach
+                                <div class="col-12 ">
+                                    <div class="pagination d-flex  justify-content-center mt-5">
+                                            {{$comments->links()}}
+                                    </div>
+                                </div>
+
+                                {{-- <div class="d-flex">
                                     <img src="{{asset('frontend_asset')}}/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                     <div class="">
                                         <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
@@ -160,7 +162,9 @@
                                         <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
                                             words etc. Susp endisse ultricies nisi vel quam suscipit </p>
                                     </div>
-                                </div>
+                                </div> --}}
+
+
                             </div>
                             <div class="tab-pane" id="nav-vision" role="tabpanel">
                                 <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
@@ -176,27 +180,39 @@
                         @if (empty($comment->confirmation))
                             {{-- <p>Confirmation is empty.</p> --}}
                         @elseif ($comment->confirmation == 'complete')
-                            <form action="#">
+
+
+                            <form action="{{route('comment',$comment->id)}}" method="POST">
+                                @csrf
                                 <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
+                                            <input type="text" class="form-control border-0 me-4 @error('name') is-invlid @enderror" placeholder="Yur Name *" name="name" value="{{Auth::user()->name}} {{Auth::user()->last_name}}" disabled>
+                                            @error('name')
+                                                <p class="text-danger">{{$message}}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                            <input type="email" class="form-control border-0 @error('email') is-invlid @enderror" placeholder="Your Email *" name="email" value="{{Auth::user()->email}}" disabled>
+                                            @error('email')
+                                                <p class="text-danger">{{$message}}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="border-bottom rounded my-4">
-                                            <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                            <textarea id="" class="form-control border-0 @error('review') is-invlid @enderror" cols="30" rows="8" placeholder="Your Review *" spellcheck="false" name="review"></textarea>
+                                            @error('review')
+                                                <p class="text-danger">{{$message}}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-between py-3 mb-5">
-                                            <div class="d-flex align-items-center">
+                                            {{-- <div class="d-flex align-items-center">
                                                 <p class="mb-0 me-3">Please rate:</p>
                                                 <div class="d-flex align-items-center" style="font-size: 12px;">
                                                     <i class="fa fa-star text-muted"></i>
@@ -205,8 +221,8 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                            </div>
-                                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                            </div> --}}
+                                            <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -312,5 +328,28 @@
     </div>
 </div>
 <!-- Single Product End -->
+
+@endsection
+
+
+@section('script')
+<script>
+    @if(session('comment'))
+        Toastify({
+        text: "{{session('comment')}}",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+        }).showToast();
+    @endif
+</script>
 
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\GestAuthController;
 use App\Http\Controllers\RoleManagementController;
@@ -15,9 +16,6 @@ use App\Http\Controllers\Frontend\FroentendController;
 use App\Http\Controllers\Frontend\ShopDetailsController;
 use App\Http\Controllers\OrderProductController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 
@@ -52,7 +50,9 @@ Route::middleware(['gestuserpermission'])->group(function (){
     Route::post('/checkout/confirm/product',[CheckoutController::class,'store'])->name('chechout.confirm.product');
 
     Route::get('/shop/deleils/profile/{id}',[ShopDetailsController::class,'index_profile'])->name('shop.details.profile');
-    
+
+    Route::post('/comment/{id}',[CommentController::class,'index'])->name('comment');
+
 
 });
 

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\AddToCart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class ShopDetailsController extends Controller
@@ -79,8 +80,9 @@ class ShopDetailsController extends Controller
             $shopDetails = Product::where('id', $id)->first();
             $categorys = Category::where('status', 'active')->latest()->get();
             $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
-             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
-            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','buyProducts','featured'));
+            $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            $comments = Comment::latest()->paginate(3);
+            return view('frontend.shopDetails.index',compact('shopDetails','relateds','categorys','buyProducts','featured','comments'));
          }else{
             $shopDetails = Product::where('id', $id)->first();
             $categorys = Category::where('status', 'active')->latest()->get();
@@ -107,9 +109,10 @@ class ShopDetailsController extends Controller
             $categorys = Category::where('status', 'active')->latest()->get();
             $relateds  = Product::where('category', $shopDetails->category)->latest()->get();
             $featured  = Product::where('status', 'active')->latest()->take(3)->get();
+            $comments = Comment::latest()->paginate(3);
 
             // return $comment . "<br>" . $user . "<br>". $id . "<br>";
-            return view('frontend.shopDetails.index',compact('shopDetails','comment','relateds','categorys','buyProducts','featured'));
+            return view('frontend.shopDetails.index',compact('shopDetails','comment','relateds','categorys','buyProducts','featured','comments'));
         }else{
 
             $user = Auth::user()->id;
